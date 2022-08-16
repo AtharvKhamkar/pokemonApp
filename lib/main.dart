@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:pokeapp/LoginPage.dart';
 import 'dart:convert';
 
 import 'package:pokeapp/pokemon.dart';
 import 'package:pokeapp/pokemondetails.dart';
+import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:pokeapp/utils/myRoutes.dart';
 
 void main() => runApp(MaterialApp(
       title: "Poke App",
-      home: HomePage(),
+      home: SplashScreen(),
       debugShowCheckedModeBanner: false,
+      initialRoute: myRoutes.loginRoute,
+      routes: {
+        "/": ((context) => HomePage()),
+        myRoutes.homeRoute: ((context) => HomePage()),
+        myRoutes.loginRoute: ((context) => LoginPage()),
+      },
     ));
 
 class HomePage extends StatefulWidget {
@@ -71,14 +80,16 @@ class _HomePageState extends State<HomePage> {
                             child: Card(
                               elevation: 3.0,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: <Widget>[
                                   Container(
                                     height: 100,
                                     width: 100,
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
-                                            image: NetworkImage(poke.img ?? ''))),
+                                            image:
+                                                NetworkImage(poke.img ?? ''))),
                                   ),
                                   Text(
                                     poke.name.toString(),
@@ -98,6 +109,21 @@ class _HomePageState extends State<HomePage> {
         child: Icon(Icons.refresh),
         backgroundColor: Colors.cyan,
       ),
+    );
+  }
+}
+
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedSplashScreen(
+      backgroundColor: Colors.cyan.shade50,
+      duration: 3000,
+      splash: Image.asset("assets/Images/pokeball.png"),
+      nextScreen: HomePage(),
+      splashTransition: SplashTransition.fadeTransition,
     );
   }
 }
