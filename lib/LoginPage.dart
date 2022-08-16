@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pokeapp/utils/myRoutes.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pokeapp/main.dart';
+import 'package:pokeapp/utils/myRoutes.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 class LoginPage extends StatefulWidget {
@@ -30,15 +31,16 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: context.canvasColor,
+      color: Colors.cyan.shade50,
       child: SingleChildScrollView(
         child: Form(
           key: _formkey,
           child: Column(
             children: [
               Image.asset(
-                'assets/Images/Login.png',
-                fit: BoxFit.cover,
+                'assets/Images/pokemon_PNG19.png',
+                height: 400,
+                width: 400,
               ),
               Text(
                 'Welcome $name',
@@ -111,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                               fontSize: 18),
                         ),
                   decoration: BoxDecoration(
-                      color: Colors.deepPurple,
+                      color: Colors.lightBlue.shade900,
                       borderRadius:
                           BorderRadius.circular(changeButton ? 50 : 8)),
                 ),

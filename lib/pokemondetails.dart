@@ -19,7 +19,7 @@ class PokeDetails extends StatelessWidget {
             top: MediaQuery.of(context).size.height * 0.1,
             child: Card(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
+                borderRadius: BorderRadius.circular(20.0),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -105,7 +105,7 @@ class PokeDetails extends StatelessWidget {
       backgroundColor: Colors.cyan[100],
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.lightBlue.shade900,
         title: Text(pokemon.name.toString()),
       ),
       body: bodyWidget(context),

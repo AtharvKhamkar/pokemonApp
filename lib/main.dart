@@ -1,26 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pokeapp/LoginPage.dart';
+import 'package:pokeapp/splashscreenpage.dart';
 import 'dart:convert';
-
+import 'LoginPage.dart';
+import 'package:pokeapp/utils/myRoutes.dart';
 import 'package:pokeapp/pokemon.dart';
 import 'package:pokeapp/pokemondetails.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:pokeapp/utils/myRoutes.dart';
 
 void main() => runApp(MaterialApp(
-      title: "Poke App",
-      home: SplashScreen(),
-      debugShowCheckedModeBanner: false,
-      initialRoute: myRoutes.loginRoute,
-      routes: {
-        "/": ((context) => HomePage()),
-        myRoutes.homeRoute: ((context) => HomePage()),
-        myRoutes.loginRoute: ((context) => LoginPage()),
-      },
-    ));
+        title: "Poke App",
+        home: SplashScreen(),
+        debugShowCheckedModeBanner: false,
+        initialRoute: myRoutes.splashscreenRoute,
+        routes: {
+          myRoutes.homeRoute: (context) => HomePage(),
+          myRoutes.loginRoute: (context) => LoginPage(),
+          myRoutes.splashscreenRoute: (context) => SplashScreen(),
+        }));
 
 class HomePage extends StatefulWidget {
+  static String? homePage;
+
   const HomePage({super.key});
 
   @override
@@ -32,6 +34,7 @@ class _HomePageState extends State<HomePage> {
       "https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json");
 
   PokeHub? pokeHub;
+  HomePage? homePage;
 
   @override
   void initState() {
@@ -51,10 +54,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.cyan.shade100,
       appBar: AppBar(
         elevation: 0,
         title: Text("Poke App"),
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.lightBlue.shade900,
       ),
       drawer: Drawer(),
       body: pokeHub == null
@@ -78,6 +82,8 @@ class _HomePageState extends State<HomePage> {
                           child: Hero(
                             tag: poke.img.toString(),
                             child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
                               elevation: 3.0,
                               child: Column(
                                 mainAxisAlignment:
@@ -107,23 +113,8 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         child: Icon(Icons.refresh),
-        backgroundColor: Colors.cyan,
+        backgroundColor: Colors.lightBlue.shade900,
       ),
-    );
-  }
-}
-
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedSplashScreen(
-      backgroundColor: Colors.cyan.shade50,
-      duration: 3000,
-      splash: Image.asset("assets/Images/pokeball.png"),
-      nextScreen: HomePage(),
-      splashTransition: SplashTransition.fadeTransition,
     );
   }
 }
